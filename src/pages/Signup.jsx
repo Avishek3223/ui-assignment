@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import InputComponent from '../components/common/InputComponent';
 
 const Signup = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -12,7 +14,7 @@ const Signup = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type } = e.target;
     setFormData({
       ...formData,
       [name]: type === 'radio' ? name === 'isAgency' ? value === 'yes' : value === 'no' : value
@@ -21,91 +23,78 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle signup logic here
+    // Navigate to profile page with user data
+    navigate('/profile', { 
+      state: { 
+        userData: {
+          fullName: formData.fullName,
+          email: formData.email
+        } 
+      } 
+    });
   };
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-md p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Create your PopX account</h1>
+      <div className="relative w-full max-w-sm p-6 border h-[50rem]">
+        <h1 className="text-3xl font-[600] w-[55%] text-gray-800 mb-2">Create your PopX account</h1>
         
         <form onSubmit={handleSubmit} className="mt-6">
           <div className="mb-4">
-            <label className="block text-purple-600 text-sm mb-1" htmlFor="fullName">
-              Full Name<span className="text-red-500">*</span>
-            </label>
-            <input
-              id="fullName"
+            <InputComponent
+              label="Full Name"
               name="fullName"
-              type="text"
-              className="w-full p-3 border border-gray-300 rounded-md"
-              placeholder="Marry Doe"
               value={formData.fullName}
               onChange={handleChange}
               required
+              width={100}
             />
           </div>
           
           <div className="mb-4">
-            <label className="block text-purple-600 text-sm mb-1" htmlFor="phoneNumber">
-              Phone number<span className="text-red-500">*</span>
-            </label>
-            <input
-              id="phoneNumber"
+            <InputComponent
+              label="Phone number"
               name="phoneNumber"
               type="tel"
-              className="w-full p-3 border border-gray-300 rounded-md"
-              placeholder="Marry Doe"
               value={formData.phoneNumber}
               onChange={handleChange}
               required
+              width={100}
             />
           </div>
           
           <div className="mb-4">
-            <label className="block text-purple-600 text-sm mb-1" htmlFor="email">
-              Email address<span className="text-red-500">*</span>
-            </label>
-            <input
-              id="email"
+            <InputComponent
+              label="Email address"
               name="email"
               type="email"
-              className="w-full p-3 border border-gray-300 rounded-md"
-              placeholder="Marry Doe"
               value={formData.email}
               onChange={handleChange}
               required
+              width={100}
             />
           </div>
           
           <div className="mb-4">
-            <label className="block text-purple-600 text-sm mb-1" htmlFor="password">
-              Password<span className="text-red-500">*</span>
-            </label>
-            <input
-              id="password"
+            <InputComponent
+              label="Password"
               name="password"
               type="password"
-              className="w-full p-3 border border-gray-300 rounded-md"
-              placeholder="Marry Doe"
               value={formData.password}
               onChange={handleChange}
               required
+              width={100}
             />
           </div>
           
           <div className="mb-5">
-            <label className="block text-purple-600 text-sm mb-1" htmlFor="company">
-              Company name
-            </label>
-            <input
-              id="company"
+            <InputComponent
+              label="Company name"
               name="company"
-              type="text"
-              className="w-full p-3 border border-gray-300 rounded-md"
-              placeholder="Marry Doe"
               value={formData.company}
               onChange={handleChange}
+              width={100}
             />
           </div>
           
@@ -145,7 +134,7 @@ const Signup = () => {
           
           <button
             type="submit"
-            className="w-full py-3 rounded-md bg-purple-600 text-white font-medium"
+            className="absolute bottom-3 left-4 w-[calc(100%-2rem)] py-3 rounded-md bg-[#6d29da] text-white font-medium"
           >
             Create Account
           </button>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import InputComponent from '../components/common/InputComponent';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,40 +13,34 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-md p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Signin to your PopX account</h1>
-        <p className="text-gray-500 mb-8">
+      <div className="w-full border max-w-sm p-6 h-[50rem]">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2 w-[60%]">Signin to your PopX account</h1>
+        <p className="text-gray-400 mb-8 text-[1.2rem] font-[500]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
         
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-purple-600 text-sm mb-1" htmlFor="email">
-              Email Address
-            </label>
-            <input
-              id="email"
+            <InputComponent
+              label="Email Address"
               type="email"
-              className="w-full p-3 border border-gray-300 rounded-md"
-              placeholder="Enter email address"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              width={100}
             />
           </div>
           
           <div className="mb-6">
-            <label className="block text-purple-600 text-sm mb-1" htmlFor="password">
-              Password
-            </label>
-            <input
-              id="password"
+            <InputComponent
+              label="Password"
               type="password"
-              className="w-full p-3 border border-gray-300 rounded-md"
-              placeholder="Enter password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              width={100}
             />
           </div>
           
