@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import InputComponent from '../components/common/InputComponent';
 
 const Login = () => {
